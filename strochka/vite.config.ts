@@ -2,14 +2,14 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 
 export default defineConfig({
-  root: '.',
+  root: resolve(__dirname, 'platforms/pwa'),
   build: {
-    outDir: 'dist',
+    outDir: resolve(__dirname, 'platforms/pwa/dist'),
     emptyOutDir: true,
   },
   resolve: {
     alias: {
-      '@modules': resolve(__dirname, '../../modules'),
+      '@modules': resolve(__dirname, 'modules'),
     },
   },
 })
