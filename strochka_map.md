@@ -217,27 +217,27 @@ strochka/
 ### Фаза 0: Спецификация + Reference Implementation (2 недели)
 
 **День 1–2: KERNEL_SPEC.md — полный контракт**
-- [ ] Async/await, жизненный цикл, обработка ошибок
-- [ ] Спецификация событий с success/error
-- [ ] Review и утверждение
+- [x] Async/await, жизненный цикл, обработка ошибок
+- [x] Спецификация событий с success/error
+- [x] Review и утверждение
 
 **День 3–5: TypeScript-ядро (reference implementation)**
-- [ ] `kernels/typescript/kernel.ts` — ~150 строк
-- [ ] init → start → stop → destroy
-- [ ] Async хендлеры, последовательное выполнение
-- [ ] Обработка ошибок модулей (не валит ядро)
-- [ ] Подписка / отписка с дедупликацией
+- [x] `kernels/typescript/kernel.ts` — ~150 строк
+- [x] init → start → stop → destroy
+- [x] Async хендлеры, последовательное выполнение
+- [x] Обработка ошибок модулей (не валит ядро)
+- [x] Подписка / отписка с дедупликацией
 
 **День 6–8: Конформные тесты**
-- [ ] `tests/conformance/test-suite.json` — сценарии (действие → ожидаемые события)
-- [ ] `tests/conformance/runner.ts` — загрузка сценариев, запуск, отчёт
-- [ ] Тесты: регистрация, эмит, жизненный цикл, ошибки
-- [ ] Покрытие: позитивные, негативные, краевые
+- [x] `tests/conformance/test-suite.json` — сценарии (действие → ожидаемые события)
+- [x] `tests/conformance/runner.ts` — загрузка сценариев, запуск, отчёт
+- [x] Тесты: регистрация, эмит, жизненный цикл, ошибки
+- [x] Покрытие: позитивные, негативные, краевые
 
 **День 9–10: Документация**
-- [ ] `docs/architecture.md`
-- [ ] `docs/contributing.md`
-- [ ] `README.md` в корне проекта
+- [x] `docs/architecture.md`
+- [x] `docs/contributing.md`
+- [x] `README.md` в корне проекта
 
 **Результат:** стабильное ядро с верифицированным контрактом. Можно начинать писать модули.
 
@@ -246,10 +246,12 @@ strochka/
 ### Фаза 1: PWA — редактор (3 недели)
 
 **Спринт 1 (неделя): Редактор + превью**
-- [ ] `modules/editor/editor.ts` — CodeMirror 6 (интеграция с ядром)
-- [ ] `modules/editor/preview.ts` — Markdown → HTML (marked + DOMPurify)
-- [ ] `modules/editor/index.html` — контейнер
-- [ ] `platforms/pwa/index.html` — точка входа
+- [x] `modules/editor/editor.ts` — CodeMirror 6 (интеграция с ядром)
+- [x] `modules/editor/preview.ts` — Markdown → HTML (marked + DOMPurify)
+- [ ] `modules/editor/index.html` — контейнер (встроен в платформу)
+- [x] `platforms/pwa/index.html` — точка входа
+- [x] `platforms/pwa/src/main.ts` — инициализация ядра и модулей
+- [x] XSS-тест: DOMPurify санитизирует HTML перед вставкой
 
 **Спринт 2 (неделя): Сохранение + проекты**
 - [ ] `modules/storage/storage-interface.ts` — абстракция
