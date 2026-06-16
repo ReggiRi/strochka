@@ -33,6 +33,10 @@ async function main(): Promise<void> {
   kernel.register(new SidebarModule())
 
   await kernel.start()
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+  }
 }
 
 main().catch((error) => {
