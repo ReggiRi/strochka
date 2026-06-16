@@ -12,4 +12,9 @@ export default defineConfig({
       '@modules': resolve(__dirname, 'modules'),
     },
   },
+  server: {
+    fs: {
+      allow: [resolve(__dirname, 'modules')],
+    },
+  },
 })
