@@ -254,15 +254,15 @@ strochka/
 - [x] XSS-тест: DOMPurify санитизирует HTML перед вставкой
 
 **Спринт 2 (неделя): Сохранение + проекты**
-- [ ] `modules/storage/storage-interface.ts` — абстракция
-- [ ] `modules/storage/storage-indexeddb.ts` — IndexedDB
-- [ ] Боковая панель с деревом файлов
-- [ ] Создание / открытие / удаление проектов
+- [x] `modules/storage/storage-interface.ts` — абстракция
+- [x] `modules/storage/storage-indexeddb.ts` — IndexedDB
+- [x] Боковая панель с деревом файлов
+- [x] Создание / открытие / удаление проектов
 
 **Спринт 3 (неделя): PWA-обёртка + интеграция**
-- [ ] `platforms/pwa/manifest.json`
-- [ ] `platforms/pwa/sw.js` — офлайн-кеширование
-- [ ] Иконки
+- [x] `platforms/pwa/manifest.json`
+- [x] `platforms/pwa/sw.js` — офлайн-кеширование
+- [x] Иконки (SVG)
 - [ ] Тест на телефоне
 - [ ] Интеграционный тест: редактор → превью
 
