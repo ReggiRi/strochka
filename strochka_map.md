@@ -275,8 +275,8 @@ strochka/
 ### Фаза 2: Git + Экспорт (3–4 недели)
 
 **Спринт 1 (неделя): Git**
-- [ ] `modules/git/git-interface.ts` — абстракция
-- [ ] `modules/git/git.ts` — isomorphic-git обёртка
+- [x] `modules/git/git-interface.ts` — абстракция
+- [x] `modules/git/git.ts` — isomorphic-git обёртка
 - [ ] Кнопка «Сохранить версию»
 - [ ] История коммитов
 
