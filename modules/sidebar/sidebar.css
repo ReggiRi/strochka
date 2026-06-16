@@ -1,0 +1,112 @@
+.sidebar-toolbar {
+  padding: 0.25rem 0;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color, #ddd);
+}
+
+.sidebar-btn {
+  display: block;
+  width: 100%;
+  padding: 0.35rem 0.5rem;
+  border: 1px dashed var(--border-color, #ccc);
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--text-color, #333);
+  text-align: left;
+}
+
+.sidebar-btn:hover {
+  background: var(--hover-bg, rgba(0,0,0,0.05));
+}
+
+.sidebar-empty {
+  color: var(--muted-color, #999);
+  font-size: 0.85rem;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.sidebar-project {
+  margin: 0.25rem 0;
+}
+
+.sidebar-project-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.3rem 0.25rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 3px;
+}
+
+.sidebar-project-name:hover {
+  background: var(--hover-bg, rgba(0,0,0,0.05));
+}
+
+.sidebar-doc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.25rem 0.75rem;
+}
+
+.sidebar-doc-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  border-radius: 3px;
+}
+
+.sidebar-doc-item:hover {
+  background: var(--hover-bg, rgba(0,0,0,0.05));
+}
+
+.sidebar-doc-item.active {
+  background: var(--active-bg, rgba(0,0,255,0.08));
+  font-weight: 600;
+}
+
+.sidebar-del-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: var(--muted-color, #999);
+  padding: 0.1rem 0.3rem;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.sidebar-project-name:hover .sidebar-del-btn,
+.sidebar-doc-item:hover .sidebar-del-btn {
+  opacity: 1;
+}
+
+.sidebar-del-btn:hover {
+  color: #c33;
+}
+
+.sidebar-add-doc {
+  margin-left: 0.75rem;
+  font-size: 0.8rem;
+  border-style: dotted;
+}
+
+@media (prefers-color-scheme: dark) {
+  .sidebar-btn {
+    color: var(--text-color, #ddd);
+  }
+  .sidebar-empty {
+    color: var(--muted-color, #666);
+  }
+  .sidebar-doc-item.active {
+    background: var(--active-bg, rgba(100,100,255,0.15));
+  }
+}
