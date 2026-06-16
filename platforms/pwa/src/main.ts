@@ -12,6 +12,8 @@
 import { KernelImpl } from '../../../kernels/typescript/src/kernel.js'
 import { EditorModule } from '../../../modules/editor/editor.js'
 import { PreviewModule } from '../../../modules/editor/preview.js'
+import { StorageModule } from '../../../modules/storage/storage-indexeddb.js'
+import { SidebarModule } from '../../../modules/sidebar/sidebar.js'
 
 async function main(): Promise<void> {
   const kernel = new KernelImpl()
@@ -27,6 +29,8 @@ async function main(): Promise<void> {
 
   kernel.register(new EditorModule())
   kernel.register(new PreviewModule())
+  kernel.register(new StorageModule())
+  kernel.register(new SidebarModule())
 
   await kernel.start()
 }

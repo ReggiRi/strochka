@@ -117,7 +117,7 @@ interface Kernel {
    * методы другого (например, sidebar вызывает Storage.CRUD).
    * @time O(1) — поиск в Map
    */
-  getModule<T extends Module>(name: string): T | undefined
+  getModule<T>(name: string): T | undefined
 
   /**
    * Уничтожает ядро: очищает все подписки и удаляет все модули.
@@ -281,7 +281,7 @@ class KernelImpl implements Kernel {
     await this.emit('kernel:stopped', {})
   }
 
-  getModule<T extends Module>(name: string): T | undefined {
+  getModule<T>(name: string): T | undefined {
     return this.modules.get(name)?.module as T | undefined
   }
 
