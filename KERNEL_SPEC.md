@@ -16,6 +16,7 @@ Kernel:
     emit(event: string, eventPayload: object): Promise<void>
     on(event: string, handler: Handler): Unsubscribe
     off(event: string, handler: Handler): void
+    getModule(name: string): Module | undefined
     start(): Promise<void>
     stop(): Promise<void>
     destroy(): void

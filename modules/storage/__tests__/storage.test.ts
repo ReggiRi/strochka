@@ -16,6 +16,7 @@ class FakeKernel implements Kernel {
   async emit(event: string, payload: unknown): Promise<void> {
     this.events.push({ event, payload })
   }
+  getModule(): undefined { return undefined }
   on(): () => void { return () => {} }
   off(): void {}
   async register(): Promise<void> {}

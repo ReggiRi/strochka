@@ -108,6 +108,18 @@ interface Kernel {
   stop(): Promise<void>
 
   /**
+   * Возвращает зарегистрированный модуль по имени.
+   *
+   * @param name — имя модуля
+   * @returns модуль или undefined если не найден
+   *
+   * @rationale Прямой доступ к модулю нужен, когда один модуль вызывает
+   * методы другого (например, sidebar вызывает Storage.CRUD).
+   * @time O(1) — поиск в Map
+   */
+  getModule<T extends Module>(name: string): T | undefined
+
+  /**
    * Уничтожает ядро: очищает все подписки и удаляет все модули.
    * Безопасно вызывать в любом состоянии.
    *
@@ -267,6 +279,10 @@ class KernelImpl implements Kernel {
     }
     this.started = false
     await this.emit('kernel:stopped', {})
+  }
+
+  getModule<T extends Module>(name: string): T | undefined {
+    return this.modules.get(name)?.module as T | undefined
   }
 
   destroy(): void {
