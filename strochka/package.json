@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite platforms/pwa",
     "build": "vite build platforms/pwa",
-    "preview": "vite preview platforms/pwa"
+    "preview": "vite preview platforms/pwa",
+    "test": "npm run test:kernel",
+    "test:kernel": "cd kernels/typescript && npx vitest run"
   },
   "dependencies": {
     "@codemirror/commands": "^6.0.0",
@@ -18,6 +20,7 @@
     "marked": "^15.0.0"
   },
   "devDependencies": {
+    "@types/node": "^25.9.3",
     "typescript": "^5.7.0",
     "vite": "^6.0.0"
   }
