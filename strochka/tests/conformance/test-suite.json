@@ -1,0 +1,121 @@
+{
+  "version": "1.0.0",
+  "scenarios": [
+    {
+      "name": "register module",
+      "steps": [
+        { "action": "register", "module": { "name": "alpha", "version": "1.0.0", "dependencies": [] } },
+        { "assert": "module_registered", "module": "alpha" }
+      ]
+    },
+    {
+      "name": "reject duplicate module",
+      "steps": [
+        { "action": "register", "module": { "name": "dup", "version": "1.0.0", "dependencies": [] } },
+        { "action": "register", "module": { "name": "dup", "version": "1.0.0", "dependencies": [] }, "expectError": true }
+      ]
+    },
+    {
+      "name": "reject missing dependency",
+      "steps": [
+        { "action": "register", "module": { "name": "needy", "version": "1.0.0", "dependencies": ["missing"] }, "expectError": true }
+      ]
+    },
+    {
+      "name": "emit and handle event",
+      "steps": [
+        { "action": "register", "module": { "name": "handler", "version": "1.0.0", "dependencies": [] } },
+        { "action": "on", "event": "test:ping", "capture": "pingResult" },
+        { "action": "emit", "event": "test:ping", "eventPayload": { "value": 42 } },
+        { "assert": "handler_called", "capture": "pingResult", "expected": { "value": 42 } }
+      ]
+    },
+    {
+      "name": "unsubscribe removes handler",
+      "steps": [
+        { "action": "register", "module": { "name": "unsub", "version": "1.0.0", "dependencies": [] } },
+        { "action": "on", "event": "test:gone", "capture": "goneResult", "id": "sub1" },
+        { "action": "off", "subscription": "sub1" },
+        { "action": "emit", "event": "test:gone", "eventPayload": {} },
+        { "assert": "handler_not_called", "capture": "goneResult" }
+      ]
+    },
+    {
+      "name": "start calls module init and start",
+      "steps": [
+        { "action": "register", "module": { "name": "lifecycle", "version": "1.0.0", "dependencies": [] } },
+        { "action": "start" },
+        { "assert": "module_status", "module": "lifecycle", "status": "active" },
+        { "assert": "init_called", "module": "lifecycle" },
+        { "assert": "start_called", "module": "lifecycle" }
+      ]
+    },
+    {
+      "name": "stop calls module stop and destroy",
+      "steps": [
+        { "action": "register", "module": { "name": "stopper", "version": "1.0.0", "dependencies": [] } },
+        { "action": "start" },
+        { "action": "stop" },
+        { "assert": "module_status", "module": "stopper", "status": "stopped" },
+        { "assert": "stop_called", "module": "stopper" },
+        { "assert": "destroy_called", "module": "stopper" }
+      ]
+    },
+    {
+      "name": "handler error does not crash kernel",
+      "steps": [
+        { "action": "register", "module": { "name": "crasher", "version": "1.0.0", "dependencies": [] } },
+        { "action": "on", "event": "test:boom", "handler": "throw" },
+        { "action": "emit", "event": "test:boom", "eventPayload": {} },
+        { "assert": "kernel_alive" }
+      ]
+    },
+    {
+      "name": "module error does not crash kernel",
+      "steps": [
+        { "action": "register", "module": { "name": "badinit", "version": "1.0.0", "dependencies": [], "failOn": "init" } },
+        { "action": "start" },
+        { "assert": "module_status", "module": "badinit", "status": "error" },
+        { "assert": "kernel_alive" }
+      ]
+    },
+    {
+      "name": "emit kernel:ready on start",
+      "steps": [
+        { "action": "register", "module": { "name": "waiter", "version": "1.0.0", "dependencies": [] } },
+        { "action": "on", "event": "kernel:ready", "capture": "readyEvent" },
+        { "action": "start" },
+        { "assert": "handler_called", "capture": "readyEvent" }
+      ]
+    },
+    {
+      "name": "emit kernel:stopped on stop",
+      "steps": [
+        { "action": "register", "module": { "name": "finisher", "version": "1.0.0", "dependencies": [] } },
+        { "action": "start" },
+        { "action": "on", "event": "kernel:stopped", "capture": "stoppedEvent" },
+        { "action": "stop" },
+        { "assert": "handler_called", "capture": "stoppedEvent" }
+      ]
+    },
+    {
+      "name": "register after start activates immediately",
+      "steps": [
+        { "action": "register", "module": { "name": "early", "version": "1.0.0", "dependencies": [] } },
+        { "action": "start" },
+        { "action": "register", "module": { "name": "late", "version": "1.0.0", "dependencies": [] } },
+        { "assert": "module_status", "module": "late", "status": "active" }
+      ]
+    },
+    {
+      "name": "handlers execute in subscription order",
+      "steps": [
+        { "action": "register", "module": { "name": "order", "version": "1.0.0", "dependencies": [] } },
+        { "action": "on", "event": "test:order", "capture": "orderResult", "transform": "append:first" },
+        { "action": "on", "event": "test:order", "capture": "orderResult", "transform": "append:second" },
+        { "action": "emit", "event": "test:order", "eventPayload": {} },
+        { "assert": "handler_called", "capture": "orderResult", "expected": ["first", "second"] }
+      ]
+    }
+  ]
+}
