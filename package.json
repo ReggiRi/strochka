@@ -8,7 +8,7 @@
     "build": "vite build platforms/pwa",
     "preview": "vite preview platforms/pwa",
     "test": "npm run test:kernel",
-    "test:kernel": "cd kernels/typescript && npx vitest run"
+    "test:kernel": "vitest run --root kernels/typescript"
   },
   "dependencies": {
     "@codemirror/commands": "^6.0.0",
@@ -22,6 +22,7 @@
   "devDependencies": {
     "@types/node": "^25.9.3",
     "typescript": "^5.7.0",
-    "vite": "^6.0.0"
+    "vite": "^6.0.0",
+    "vitest": "^3.0.0"
   }
 }
