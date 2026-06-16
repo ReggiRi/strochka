@@ -113,6 +113,13 @@ export class StorageModule implements Module, Storage {
 
   private db: IDBDatabase | null = null
   private kernel: Kernel | null = null
+  private dbName: string
+  private dbVersion: number
+
+  constructor(dbName: string = DB_NAME, dbVersion: number = DB_VERSION) {
+    this.dbName = dbName
+    this.dbVersion = dbVersion
+  }
 
   /**
    * @param kernel — ссылка на ядро для событий
@@ -125,7 +132,7 @@ export class StorageModule implements Module, Storage {
    * @time O(1) — асинхронное открытие DB
    */
   async start(): Promise<void> {
-    this.db = await openDB()
+    this.db = await openDB(this.dbName, this.dbVersion)
     this.kernel?.emit('storage:ready', {})
   }
 
